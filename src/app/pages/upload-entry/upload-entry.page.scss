@@ -1,0 +1,71 @@
+.competition-card {
+    position: relative;
+    margin-top: 16px;
+  }
+  
+  .background-image {
+    background-image: url('/assets/path-to-your-image.png'); /* Update path */
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 100%;
+    // border-radius: 15px;
+    // opacity: 0.7;
+    // filter: blur(3px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: -200px;
+
+  }
+  
+  .card-content {
+    position: relative;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    margin-top: 200px;
+  }
+  
+  .enrollment-status {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .enrolled {
+    color: #ff4500;
+    font-weight: bold;
+  }
+  
+  .video-container {
+    overflow: hidden;
+    border-radius: 10px; /* Adjust as needed */
+}
+
+.rounded-card {
+  border-radius: 25px; /* Adjust the value as needed */
+  overflow: hidden;
+  margin-top: 100px ;
+}
+
+ion-card-content {
+  padding: 16px; /* Adjust the padding as needed */
+  margin-top: -33px; /* This can also be added */
+}
+
+.custom-signin-button {
+	background-color: #ff512c !important; /* Set your desired background color */
+	color: white !important; /* Set text color */
+	border: 2px solid #ff512c !important; /* Set border color */
+	border-radius: 40px !important; /* Ensure the button retains the round shape */
+  }
+  
+  ion-toolbar {
+    --background: white !important; /* Ensures toolbar background is white */
+    --ion-color-base: black !important; /* Sets the base color to black for icons and text */
+    --ion-text-color: black !important; /* Ensures text appears in black */
+  }
+  

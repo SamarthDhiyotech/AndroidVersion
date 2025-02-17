@@ -1,0 +1,95 @@
+<!-- <app-header [title]="'Notification'"></app-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of notifications">
+    <ion-card-content>
+      <ion-card-header>
+        <ion-card-title>
+          {{item.title}}
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{item.body}}
+        </ion-card-subtitle>
+      </ion-card-header> 
+      <div>{{item.creationDate | date}}</div>
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->
+<!-- <div *ngIf="messagingService.currentMessage | async as message">
+  <h2>Notification</h2>
+  <p>{{ message.notification?.title }}</p>
+  <p>{{ message.notification?.body }}</p>
+</div> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" routerLink="/welcome">
+      <ion-icon style="color: black; width: 24px; height: 24px;" name="arrow-back-outline"></ion-icon>
+    </ion-button>    
+    <ion-title style="color: black;">Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-card *ngIf="messagingService?.currentMessage | async as message">
+  <ion-card-content>
+    <ion-card-header>
+      <ion-card-title>{{ message?.notification?.title }}</ion-card-title>
+      <ion-card-subtitle>{{ message?.notification?.body }}</ion-card-subtitle>
+    </ion-card-header>
+    <div>{{ message?.notification?.creationDate | date }}</div>
+  </ion-card-content>
+</ion-card> -->
+
+<!-- <div *ngFor="let message of getMessages()">
+  {{ message }}
+</div> -->
+
+
+<!-- <ion-col *ngIf="!contests || contests.length < 1">
+  <div class="no-data-card ion-text-center">
+    <div class="icon-container">
+      <img src="assets/img/Group 33731.png" alt="No Notifications"/>
+    </div>
+    <h3>No Notifications!</h3> -->
+    <!-- <p>Please Comeback after a while</p> -->
+    <!-- <ion-button color="danger" expand="block">Explore Competition</ion-button> -->
+  <!-- </div>
+</ion-col>  -->
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="notifications.length > 0; else noNotifications">
+    <ion-card *ngFor="let item of notifications" (click)="openNotification(item)">
+      <ion-card-content>
+        <ion-card-header>
+          <ion-card-title>{{ item.title }}</ion-card-title>
+          <ion-card-subtitle>{{ item.body }}</ion-card-subtitle>
+        </ion-card-header>
+        <div>{{ item.creationDate | date }}</div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #noNotifications>
+    <ion-col class="ion-text-center">
+      <div class="no-data-card">
+        <div class="icon-container">
+          <img src="assets/img/Group 33731.png" alt="No Notifications"/>
+        </div>
+        <h3>No Notifications!</h3>
+      </div>
+    </ion-col>
+  </ng-template>
+</ion-content>

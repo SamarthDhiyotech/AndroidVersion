@@ -1,0 +1,221 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <div class="ion-text-center">
+      <ion-label style="font-size: 22px; margin-left: -25px;">
+       Welcome to Surshree
+      </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <!-- <ion-toolbar color="light">
+    <ion-segment color="primary" [(ngModel)]="opt" >
+      <ion-segment-button href="#signin" value="signin">
+        <ion-label><app-msg key="login.signin" class="custom_login" style="font-size: 20px;"></app-msg></ion-label>
+      </ion-segment-button>
+      <ion-segment-button href="#signup" value="signup">
+        <ion-label><app-msg key="login.signup" class="custom_login" style="font-size: 20px;"></app-msg></ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar> -->
+  <div [ngSwitch]="opt" style="padding-top: 15px;">
+        <form [formGroup]="loginForm" *ngSwitchCase="'signin'">
+          <div class="ion-text-center ion-padding-top">
+            <img src="assets/img/surshreelogo.png" class="welcome_page" style="padding-top: 10px; width: 87px; height: 107px; max-width: 220px;"/>
+          </div>
+          <ion-grid class="ion-text-center ion-padding-top"> 
+            <ion-row color="primary" class="ion-justify-content-center">
+              <ion-col class="ion-text-center" size-md="6" size-lg="5" size-xs="12">
+                <div class="ion-text-center">
+                  <div style="width: 100%; display: flex;">
+                    <p style="font-size: 24px;">Sing In</p>
+                  </div>
+                  <ion-item class="custom-input">
+                    <ion-icon name="mail-outline" slot="start"></ion-icon>
+                    <ion-label position="floating">Enter Registered Mobile No.</ion-label>
+                    <ion-input type="text" [formControl]="userId" maxlength="10" minlength="10"></ion-input>
+                  </ion-item>
+                  <br/>
+                  <ion-item [hidden]="!enableOtp" class="custom-input">
+                    <ion-label position="floating">Enter OTP</ion-label>
+                    <ion-input type="password" [formControl]="otp" maxlength="6" minlength="6" [disabled]="!enableOtp"></ion-input>
+                  </ion-item>
+                  <ion-item [hidden]="!enablePassword" class="custom-input">
+                    <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                    <ion-label position="floating">Enter Password</ion-label>
+                    <ion-input type="password" [formControl]="signInPassword" maxlength="15" minlength="8" [disabled]="!enablePassword"></ion-input>
+                  </ion-item>
+                </div>
+                <div class="ion-padding ion-text-center">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center" [hidden]="enableSignin">
+                      <ion-col size-md="6" size-lg="5" size-xs="6">
+                        <ion-button shape="round" type="submit" [disabled]="userId.invalid" expand="block" (click)="enablePasswordField()" fill="black" style="background-color: #ff512c;opacity: 1; color: white; border-radius: 40px;">
+                          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                          Password
+                        </ion-button>
+                      </ion-col>
+                      <ion-col size-md="6" size-lg="5" size-xs="6">
+                        <ion-button shape="round" type="submit" [disabled]="userId.invalid" expand="block" (click)="enableOtpField()" fill="" style="background-color: #ff512c; opacity: 1; color: white; border-radius: 40px;">
+                          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                          OTP
+                        </ion-button>
+                      </ion-col>
+                      
+                      <!-- Add this part for the signup text -->
+                      <ion-col size-md="6" size-lg="5" size-xs="6">
+                        <p style="text-align: center; margin-top: 10px;">
+                          Don’t have an account? <a (click)="switchToSignUp()" style="color: #ff512c; text-decoration: underline;">Sign up</a>
+                        </p>
+                      </ion-col>
+                      
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center" [hidden]="!enableSignin">
+                      <ion-col size-md="6" size-lg="5" size-xs="6">
+                        <ion-button shape="round" type="submit"  expand="block" (click)="signIn()" [disabled]="loginForm.invalid"  fill="soild"  style="background-color: #ff512c;opacity: 1; color: white; border-radius: 40px;">
+                        <!-- <ion-button shape="round" type="submit" expand="block" (click)="signIn()" [disabled]="loginForm.invalid" class="custom-signin-button"> -->
+                          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                          Sign In
+                        </ion-button>
+                      </ion-col>                      
+                      <ion-col  size-md="6" size-lg="5" size-xs="6">
+                        <ion-button shape="round" type="submit"  expand="block" fill="soild" (click)="reset()"  style="background-color: #ff512c;opacity: 1; color: white; border-radius: 40px;">
+                          <ion-icon slot="start" name="refresh-sharp"></ion-icon>
+                          Reset
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <br/>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+
+    <form [formGroup]="signupForm" *ngSwitchCase="'signup'">
+      <ion-grid class="ion-padding-top"> 
+        <ion-header >
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-icon (click)="switchToSignIn()" style="color: black; width: 24px; height: 24px;" name="arrow-back-outline"></ion-icon>
+            </ion-buttons>
+            <ion-title style="color: black; font-size: 24px;">Sign Up</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-row color="primary" class="ion-justify-content-center">
+          <ion-col class="ion-align-self-center"  size-md="6" size-lg="5" size-xs="12">
+            <div class="ion-padding ion-justify-content-center">
+              <ion-item class="custom-input">
+                <ion-icon name="call-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter 10 digit mobile no. <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="tel" [formControl]="signUpMobNo" maxlength="10" minlength="10"></ion-input>
+              </ion-item> 
+              <app-error [condition]="signUpMobNo.touched && signUpMobNo.invalid" msg="Please enter your mobile no."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter Password (min 8, max 15 letters) <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="password" [formControl]="password" maxlength="15" minlength="8"></ion-input>
+              </ion-item>
+              <app-error [condition]="password.touched && password.invalid" msg="Please enter your password."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="person-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter First Name <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="text" [formControl]="firstName" maxlength="40"></ion-input>
+              </ion-item>
+              <app-error [condition]="firstName.touched && firstName.invalid" msg="Please enter First Name."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter Middle Name</ion-label>
+                <ion-input type="text" [formControl]="middleName" maxlength="40"></ion-input>
+              </ion-item>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="person-add-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter Last Name <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="text" [formControl]="lastName" maxlength="40"></ion-input>
+              </ion-item>
+              <app-error [condition]="lastName.touched && lastName.invalid" msg="Please enter Last Name."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="people-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Gender<label style="color: black !important;">*</label></ion-label>
+                <ion-select placeholder="--Select Gender--" [formControl]="gender">
+                  <ion-select-option value="F">Female</ion-select-option>
+                  <ion-select-option value="M">Male</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <app-error [condition]="gender.touched && gender.invalid" msg="Please select Gender."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="calendar-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Date of Birth <label style="color: black !important;">*</label></ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" [formControl]="dob"></ion-datetime>
+              </ion-item>
+              <app-error [condition]="dob.touched && dob.invalid" msg="Please enter your Date of Birth."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="globe-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Country <label style="color: black !important;">*</label></ion-label>
+                <ion-select placeholder="--Select Country--" [formControl]="country">
+                  <ion-select-option value="IN" selected="true">India</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <app-error [condition]="country.touched && country.invalid" msg="Please select country."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="map-outline" slot="start"></ion-icon>
+                <ion-label position="floating">State <label style="color: black !important;">*</label></ion-label>
+                <ion-select placeholder="--Select State--" [formControl]="state">
+                  <ion-select-option *ngFor="let state of states" [value]="state.key">{{state.desc}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <app-error [condition]="state.touched && state.invalid" msg="Please select state."></app-error>
+              &nbsp;
+              <ion-item class="custom-input">
+                <ion-icon name="location-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter City <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="text" [formControl]="city" maxlength="40"></ion-input>
+              </ion-item>
+              <app-error [condition]="city.touched && city.invalid" msg="Please enter city."></app-error>
+              &nbsp;
+              <!-- <ion-item class="custom-input">
+                <ion-icon name="document-text-outline" slot="start"></ion-icon>
+                <ion-label position="floating">Enter Aadhar No. <label style="color: black !important;">*</label></ion-label>
+                <ion-input type="tel" [formControl]="aadharNo" maxlength="12"  minlength="12"></ion-input>
+              </ion-item>
+              <app-error [condition]="aadharNo.touched && aadharNo.invalid" msg="Please enter 12 digit aadhar no."></app-error>
+              &nbsp;
+              <app-multi-file-upload class="custom-input" [formControl]="aadharPhoto" msg="Upload Aadhar Photo" id="aadharUpload" format="png, jpeg, jpg"></app-multi-file-upload>
+              &nbsp;
+              <app-error [condition]="aadharNo.touched && aadharPhoto.invalid" msg="Please upload aadhar photo." ></app-error> -->
+            </div>
+            <br/>
+            <div class="ion-padding ion-justify-content-center">
+              <ion-button shape="round" type="submit" [disabled]="signupForm.invalid"  expand="block" (click)="generateOtp(false)  " style="color: #ff512c; text-decoration: underline;">
+                <ion-icon name="log-in-outline" slot="start"></ion-icon>
+                Sign Up
+              </ion-button>
+            </div>
+            <ion-col size-md="6" size-lg="5" size-xs="6">
+              <p style="text-align: center; margin-top: 10px;">
+                Already have an account? <a (click)="switchToSignIn()" style="color: #ff512c; text-decoration: underline;">Signin</a>
+              </p>
+            </ion-col>
+            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+  <div id="recaptcha-container"></div>
+</ion-content>
+
+<!-- <app-footer></app-footer>  -->

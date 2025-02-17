@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" routerLink="/participate-in-comp">
+      <ion-icon style="color: black; width: 24px; height: 24px;" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title *ngIf="competition" style="color: black;">
+      <!-- {{ competition.title }} -->
+        Participate
+    </ion-title>
+    <ion-buttons slot="end" *ngIf="competition && ls.hasFunction('FUNC_VIEW_ADMIN_MENU') && competition.isWinnerAnnounced != '1'">
+      <ion-button [routerLink]="['/manage-competition-entries', competition.competitionId]">
+        <ion-icon slot="icon-only" name="pencil-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <!-- Modal dialog for video playback -->
+  <p-dialog [(visible)]="display" modal="true" dismissableMask="true">
+    <mat-video 
+      src="{{ util.getFullUrl('file/') + videoToPlay }}" 
+      [autoplay]="true" 
+      [preload]="true" 
+      [fullscreen]="true" 
+      [download]="false" 
+      color="accent" 
+      spinner="spin" 
+      [overlay]="true" 
+      [playsinline]="false" 
+      style="height: 320px;">
+    </mat-video>
+  </p-dialog>
+
+  <!-- Competition Details Card -->
+  <div *ngIf="competition">
+    
+    <div class="competition-card">
+      <img 
+      src="{{ util.getFullUrl('file/') + competition.compPhoto }}" 
+      class="background-image" 
+      alt="Background Image"
+      *ngIf="competition.compPhoto" 
+    />
+    </div>
+    <div style="margin-top: 200px;"> <!-- Adjust the value as needed -->
+    <ion-card class="rounded-card">
+      <ion-card-header>
+          <ion-card-title>{{ competition.title }}</ion-card-title>
+          <ion-card-subtitle>Category: <b>{{ competition.competitionCategory }}</b></ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <div style="display: flex; align-items: center;">
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-label class="ion-text-right" style="margin-left: 8px;">
+              <b>{{ competition.minAge }} - {{ competition.maxAge }}</b>
+            </ion-label>
+          </div>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <div style="display: flex; align-items: center; width: 100%;">
+            <ion-icon name="cash-outline"></ion-icon> 
+            <!-- <ion-label>Enrollment Fee</ion-label> -->
+            <ion-label class="ion-text-right" style="margin-left: 8px;">
+              <b>{{ competition.subscriptionPrice != null ? 'INR ' + competition.subscriptionPrice : 'Free' }}</b>
+            </ion-label>
+          </div>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <div style="display: flex; align-items: center; width: 100%;">
+            <ion-icon name="calendar-outline"></ion-icon>
+            <ion-label class="ion-text-right" style="margin-left: 8px;">
+              <b>{{competition.startTime }} - {{ competition.endTime }}</b>
+            </ion-label>
+          </div>
+        </ion-item>
+        
+          <div class="ion-text-center" *ngIf="competition.isUserEnrolled != true && !ls.hasFunction('FUNC_VIEW_ADMIN_MENU')">
+              <ion-button color="warning" fill="solid" (click)="enroll(competition)">
+                  <ion-icon name="cash-outline" slot="start"></ion-icon>
+                  Enroll
+              </ion-button>
+          </div>
+          <div *ngIf="competition.isUserEnrolled && !isEntrySubmitted(competition.competitionId)">
+            <app-multi-file-upload 
+              msg="Upload Entry" 
+              id="uploadEntry" 
+              [(ngModel)]="fileId" 
+              format="mp3, mp4">
+            </app-multi-file-upload>
+            <div class="ion-text-center">
+              <ion-button color="primary" *ngIf="fileId" (click)="uploadEntry()">
+                <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+                Upload
+              </ion-button>
+            </div>
+          </div>
+      </ion-card-content>
+  </ion-card>
+  
+    </div>
+
+    <!-- Video upload and playback sections -->
+    
+
+    <div *ngIf="competition.isUserEnrolled && isEntrySubmitted(competition.competitionId)">
+      <ion-card-header>
+        <div>
+          <p class="enrollment-status">Enrollment Status: <span class="enrolled">Enrolled</span></p>  
+        </div>
+        <!-- <div>
+
+        <ion-card-title>Enrollment Status</ion-card-title>
+        <ion-card-subtitle color="success">Enrolled</ion-card-subtitle>
+      </div> -->
+      </ion-card-header>
+      <ion-card-content>
+        <div class="video-container" style="overflow: hidden; border-radius: 30px;">
+          <mat-video 
+            src="{{ util.getFullUrl('file/') + getFileId(competition.competitionId) }}" 
+            [autoplay]="false" 
+            [preload]="'auto'" 
+            [fullscreen]="true" 
+            [download]="false" 
+            color="accent" 
+            spinner="spin" 
+            [overlay]="true" 
+            [playsinline]="true" 
+            style="width: 100%; border-radius: 10px;">
+          </mat-video>
+        </div>
+      </ion-card-content>
+      
+    </div>
+
+    <!-- Admin Segment Control for managing competition entries -->
+    <div *ngIf="ls.hasFunction('FUNC_VIEW_ADMIN_MENU') && competition && competition.isWinnerAnnounced != '1'">
+      <ion-toolbar color="light">
+        <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="all">
+            All Entries
+          </ion-segment-button>
+          <ion-segment-button value="pending">
+            Pending
+          </ion-segment-button>
+          <ion-segment-button value="approved">
+            Approved
+          </ion-segment-button>
+          <ion-segment-button value="rejected">
+            Rejected
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+      <br/>
+
+      <!-- Displaying filtered entries based on the selected segment -->
+      <ion-card *ngFor="let entry of filteredEntries">
+        <ion-card-header>
+          <ion-card-title>{{ entry.entryTitle }}</ion-card-title>
+          <ion-card-subtitle>Submitted by: {{ entry.participantName }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          {{ entry.description }}
+        </ion-card-content>
+
+        <mat-video 
+          src="{{ util.getFullUrl('file/') + entry.fileId }}" 
+          [autoplay]="false" 
+          [preload]="true" 
+          [fullscreen]="true" 
+          [download]="false" 
+          color="accent" 
+          spinner="spin" 
+          [overlay]="true" 
+          [playsinline]="true" 
+          style="width: 100%;">
+        </mat-video>
+
+        <div class="ion-text-center">
+          <ion-button color="success" (click)="approveEntry(entry.entryId)">
+            <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+            Approve
+          </ion-button>
+          <ion-button color="danger" (click)="rejectEntry(entry.entryId)">
+            <ion-icon slot="start" name="close-outline"></ion-icon>
+            Reject
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

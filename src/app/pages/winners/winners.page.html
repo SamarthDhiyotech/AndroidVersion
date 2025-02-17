@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" routerLink="/welcome">
+      <ion-icon style="color: black; width: 24px; height: 24px;" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title style="color: #000;">View Winners</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <p-dialog [(visible)]="display" modal="true" dismissableMask="true">
+    <mat-video src="{{util.getFullUrl('file/') + videoToPlay}}" 
+               [autoplay]="true" [preload]="true" [fullscreen]="true" [download]="false" color="accent" spinner="spin" 
+               [overlay]="true" [playsinline]="false" style="height: 320px; border-radius: 12px;">
+    </mat-video>
+  </p-dialog>
+
+  <ion-item *ngIf="showError && winners.length < 1">
+    <ion-label color="danger" class="ion-text-center"><b>No Records Found.</b></ion-label>
+  </ion-item>
+
+  <!-- Dots -->
+  <div class="ion-text-center" *ngIf="showProgress">
+    <ion-spinner name="dots" color="primary"></ion-spinner> 
+  </div>
+
+  <!-- <div class="competition-card">
+    <img 
+      src="assets/img/Group 355.png"
+      class="background-image" 
+      alt="Background Image"
+      *ngIf="competition.compPhoto" 
+    />
+  </div> -->
+  <ion-grid fixed *ngIf="!showProgress">
+    <!-- <div class="competition-card">
+      <img 
+        src="assets/img/winbackground.png" 
+        class="background-image" 
+        alt="Background Image"
+      />
+    </div> -->
+    <ion-row>
+      <ion-col size="12" *ngFor="let winner of winners">
+        <ion-card class="winner-card">
+          <ion-card-header class="card-header">
+              <ion-item lines="none" class="header-item" detail="false">
+                  <ion-avatar slot="start">
+                      <img src="{{util.getFullUrl('file/') + winner.compPhoto}}" *ngIf="winner.compPhoto"/>
+                      <img src="../../../assets/img/win.jpeg" *ngIf="!winner.compPhoto"/>
+                  </ion-avatar>
+                  <ion-label class="ion-text-wrap">
+                      <h2 class="comp-title">{{winner.compTitle}}</h2>
+                      <p class="comp-desc">{{winner.compDesc}}</p>
+                  </ion-label>
+              </ion-item>
+          </ion-card-header>
+      
+          <ion-card-content class="winner-card-content">
+              <ion-list lines="none">
+                  <ion-item class="winner-item" detail="false" *ngFor="let dtl of winner.winners">
+                      <ion-avatar slot="start">
+                          <ion-img [src]="'../../../assets/img/'+ (dtl.gender == 'F' ? 'female.jpg' : 'male.jpg')" *ngIf="!dtl.userProfile"></ion-img>
+                          <ion-img [src]="util.getFullUrl('file/') + dtl.userProfile" *ngIf="dtl.userProfile"></ion-img>
+                      </ion-avatar>
+                      <ion-label class="ion-text-wrap">
+                          <h2><b>{{dtl.fullUserName}}</b></h2>
+                          <p>Age: {{dtl.age}}</p>
+                          <p>{{dtl.city}}, {{mst.getStateDescByKey(dtl.state)}}</p>
+                          <p>Position: {{getPositionDescription(dtl)}}</p>
+                      </ion-label>
+                      <ion-button fill="outline" slot="end" (click)="viewVideo($event, dtl.fileId)" *ngIf="dtl.fileId" style="color: #ff512c;" class="custom-outline">
+                          Song
+                          <ion-icon name="play" slot="end"></ion-icon>
+                      </ion-button>
+                  </ion-item>
+              </ion-list>
+          </ion-card-content>
+      </ion-card>
+      
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

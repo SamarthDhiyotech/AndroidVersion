@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar class="app-round-bottom custom-background">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <ion-text>Current Location</ion-text>
+      <ion-text>{{ currentAddress }}</ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/notification']">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<div class="background-image">
+  <div class="grid-container">
+    <div class="grid-item">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 367.png" class="clickable-image" (click)="participateInCompetition()">
+        </div>
+        <button class="overlay-button" disabled>
+          <span>Participate In Competition</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 355.png" class="clickable-image" (click)="viewWinners()">
+        </div>
+        <button class="overlay-button" disabled>
+          <span>View Winners</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 364.png" class="clickable-image" (click)="learnMusic()">
+        </div>
+        <button class="overlay-button" disabled>
+          <span>Learn Music</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 364.png" class="clickable-image" (click)="comingSoon()">
+        </div>
+        <button class="overlay-button" disabled>
+          <span>Coming Soon</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="grid-item">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 370.png" class="clickable-image" (click)="share()">
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-item" *ngIf="ls.hasFunction('FUNC_VIEW_ADMIN_MENU')">
+      <div class="app-card-content">
+        <div class="center-text">
+          <img src="assets/img/Group 369.png" class="clickable-image" (click)="ManageCompetition()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

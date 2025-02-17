@@ -1,0 +1,259 @@
+.segment-toolbar {
+    --ion-toolbar-padding-start: 10px;
+    --ion-toolbar-padding-end: 10px;
+  }
+  
+  ion-segment-button {
+    text-align: center;
+    margin-top: 10px;
+    --indicator-color: #ff512c;
+    --color-checked: white; /* Text color when selected */
+    --background-checked: #ff512c;
+    font-size: 5px;
+    font-weight: bold;
+    border-radius: 80px;
+    text-transform: capitalize; /* Makes the first letter uppercase */
+    height: 30px; /* Decrease the height */
+    width: 70px; /* Decrease the width */
+
+  }
+  
+  .course-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+  }
+  
+  .enroll-btn {
+    text-transform: capitalize; /* Makes the first letter uppercase */
+    --border-radius: 10px;
+    --background: linear-gradient(to right, rgba(255, 81, 44, 1), rgba(255, 81, 44, 1));
+  }
+  
+  
+  .card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .training-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .training-category,
+  .training-price {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  ion-toolbar {
+    --background: red !important; /* Ensures toolbar background is white */
+    --ion-color-base: black !important; /* Sets the base color to black for icons and text */
+    --ion-text-color: white !important; /* Ensures text appears in black */
+  }
+
+  
+
+ion-chip{
+    background : var(--ion-color-success);
+    color : white !important;
+  }
+  .competition-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+  }
+  
+  .competition-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* ion-header adjustments */
+  ion-header::after {
+    background-image: none !important;
+    /* Uncomment the line below if you want to add a background image */
+    /* background-image: url(assets/icon/bg3.png); */
+    /* background-size: 100% 100%; */
+  }
+  
+
+  
+  /* Chip styling */
+  ion-chip {
+    background: var(--ion-color-success);
+    color: white !important;
+  }
+  
+  /* Card styling */
+  .competition-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+  }
+  
+  .competition-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  
+  /* Styles for the competition card */
+  .competition-card-img {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .competition-card-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  
+  /* Back icon styling */
+  .back-icon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 24px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly dark background for contrast */
+    padding: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .black-background {
+    background-color: black;
+    height: 200px; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Color for the icon */
+  }
+  
+  ion-tab-button.selected {
+    --color: #0072FF; /* Color for selected tab label */
+    background-color: rgba(255, 255, 255, 0.1); /* Optional: Background color for the selected tab */
+  }
+  
+  /* Change color of the selected icon */
+  ion-tab-button.selected ion-icon {
+    color: #0072FF; /* Color for the selected tab icon */
+  }
+  
+  /* Change color of the selected label */
+  ion-tab-button.selected ion-label {
+    color: #0072FF; /* Color for the selected tab label */
+  }
+  
+  /* Color for unselected tab icons */
+  ion-tab-button ion-icon {
+    color: #A9A9A9; /* Ash color for unselected tab icons */
+  }
+  
+  /* Color for unselected tab labels */
+  ion-tab-button ion-label {
+    color: white; /* Maintain white for unselected tab labels */
+  }
+  .competition-card-details {
+    align-items: center;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    height: 100px; /* Adjust as necessary */
+    background-color: rgba(50, 50, 50, 0.3); /* 30% transparent */
+    border-radius: 12px; /* Curved edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for depth */
+    padding: 16px;
+    color: white;
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    justify-content: space-between; /* Space between details */
+    align-items: center; /* Center items vertically */
+    text-align: left; /* Left-align text */
+  }
+  
+  
+  .competition-card-details ion-card-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .competition-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 0 8px; /* Space between items */
+  }
+  
+  .competition-info ion-icon {
+    margin-right: 4px; /* Space between icon and text */
+  }
+  
+  .competition-fee {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .competition-fee b {
+    font-size: 18px;
+  }
+  
+  .enroll-buttonn {
+    width: 100%;
+    text-transform: capitalize; /* Makes the first letter uppercase */
+
+    background-color: #ff5722 !important; /* Bright orange color */
+    color: white !important;
+    text-transform: none;
+  }
+  .competition-card-img {
+    position: relative;
+    /* Maintain aspect ratio for better layout */
+    padding-bottom: 56.25%; /* Adjust this percentage as needed */
+  }
+  
+  .competition-card-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image fills the container */
+  }
+  
+  /* When image is missing, display a placeholder or alternative content */
+  .competition-card-img:empty {
+    background-color: #f0f0f0; /* Placeholder background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style the placeholder content */
+  .competition-card-img:empty ion-icon {
+    font-size: 48px;
+    color: #ccc;
+  }
+  
+  .custom-button {
+    --color: #ff512c; /* Text color */
+    --border-color: #ff512c; /* Outline color */
+  }
+  

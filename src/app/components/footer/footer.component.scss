@@ -1,0 +1,25 @@
+ion-tab-button.selected {
+    --color: #fc3503; /* Color for selected tab icon and label */
+    // background-color: rgba(255, 255, 255, 0.1); /* Optional: Background color for the selected tab */
+  }
+  
+  /* Change color of the selected icon */
+  ion-tab-button.selected ion-icon {
+    color: #fc3503; /* Color for the selected tab icon */
+  }
+  
+  /* Change color of the selected label */
+  ion-tab-button.selected ion-label {
+    color: #fc3503; /* Color for the selected tab label */
+  }
+  
+  /* Color for unselected tab icons */
+  ion-tab-button ion-icon {
+    color: #A9A9A9; /* Ash color for unselected tab icons */
+  }
+  
+  /* Color for unselected tab labels */
+  ion-tab-button ion-label {
+    color: white; /* White color for unselected tab labels */
+  }
+  

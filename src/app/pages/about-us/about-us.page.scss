@@ -1,0 +1,51 @@
+
+  .about-us-card {
+    --background: #fff;
+    // --background: #1a1b1e;
+    color: black;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .about-card-header {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .about-image {
+    display: block;
+    margin: 0 auto;
+    width: 180px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  .about-tagline {
+    display: block;
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--ion-color-primary);
+  }
+  .about-details {
+    margin-top: 20px;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  h1, h2 {
+    // color: var(--ion-color-tertiary);
+    color: #000;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  ion-toolbar {
+    --background: white !important; /* Ensures toolbar background is white */
+    --ion-color-base: black !important; /* Sets the base color to black for icons and text */
+    --ion-text-color: black !important; /* Ensures text appears in black */
+      display: flex;
+  }

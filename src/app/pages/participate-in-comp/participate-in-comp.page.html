@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" routerLink="/welcome">
+      <ion-icon style="color: black; width: 24px; height: 24px;" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title style="color: #000;">Participate</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let c of contests" size-md="4" size-lg="4" size-xs="12" size-sm="12">
+        <ion-card button="true" (click)="openSubmittedEntryPage(c.competitionId)" style="border-radius: 12px; overflow: hidden;">
+          <div class="competition-card-img">
+            <img [src]="c.compPhoto ? util.getFullUrl('file/') + c.compPhoto : placeholderImage" />
+            
+          </div>
+          <div class="competition-card-details">
+            <div class="details">
+              <div class="competition-info">
+                <!-- <ion-icon name="title"></ion-icon> -->
+                <span>{{c.title}}</span>
+              </div>
+              <div class="competition-info">
+                <!-- <ion-icon name="person-outline"></ion-icon> -->
+                <span>{{c.competitionCategory}}</span>
+              </div>
+              <div class="competition-info">
+                <ion-icon name="person-outline"></ion-icon>
+                <span>{{c.minAge}} - {{c.maxAge}}</span>
+              </div>
+              <div class="competition-info">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>{{c.startDate}}</span>
+              </div>
+              <!-- <div class="competition-fee">
+                <span>Start from</span>
+                <b>INR : {{c.subscriptionPrice != null ? c.subscriptionPrice : 'Free'}}</b>
+              </div> -->
+            </div>
+            <div class="rightSection">
+            <div class="competition-fee">
+              <!-- <span>Start from</span> -->
+              <p >Start from</p>
+              <b > {{c.subscriptionPrice != null ? 'Rs. ' + c.subscriptionPrice : 'Free'}}</b>
+            </div>
+            <!-- &nbsp;  -->
+            <div *ngIf="c.isUserEnrolled != true">
+              <ion-button fill="outline" shape="round" (click)="enroll(c)" class="custom-button">
+                <ion-icon name="cash-outline" slot="start"></ion-icon>
+                Enroll
+            </ion-button>   
+            <ion-grid *ngIf="c.isUserEnrolled == true">
+              <ion-row>
+                    <ion-label>Enrolled</ion-label>
+                  <ion-text>Tap on card to for more details</ion-text>
+              </ion-row>
+            </ion-grid>         
+            </div>
+          </div>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-col *ngIf="!contests || contests.length < 1">
+      <div class="no-data-card ion-text-center">
+        <div class="icon-container">
+          <img src="assets/img/Group 33596.png" alt="No Upcoming Participate Icon" />
+        </div>
+        <h3>No Upcoming Competition</h3>
+        <!-- <p>Please Comeback after a while</p> -->
+        <ion-button color="danger" expand="block">Explore Competition</ion-button>
+      </div>
+    </ion-col>    
+  </ion-grid>
+</ion-content>
+
+
+<!-- <app-footer></app-footer> -->

@@ -11,7 +11,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es5",
+    "target": "es2015",  // Updated target to es2015 for better support with modern Angular
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -25,8 +25,8 @@
     "strictInjectionParameters": true
   },
   "configurations": {
-  "production": {
-    "es5BrowserSupport": false
+    "production": {
+      "es5BrowserSupport": false
+    }
   }
-}
 }

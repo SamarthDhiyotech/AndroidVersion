@@ -85,15 +85,15 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.initilizeLoginForm();
-    this.states = [
-      { key: 'MH', desc: 'Maharashtra' },
-      { key: 'DL', desc: 'Delhi' },
-      { key: 'UP', desc: 'Uttar Pradesh' },
-      { key: 'KA', desc: 'Karnataka' },
-      { key: 'TN', desc: 'Tamil Nadu' },
-      { key: 'WB', desc: 'West Bengal' },
-      // Add more states here as needed
-    ];
+    // this.states = [
+    //   { key: 'MH', desc: 'Maharashtra' },
+    //   { key: 'DL', desc: 'Delhi' },
+    //   { key: 'UP', desc: 'Uttar Pradesh' },
+    //   { key: 'KA', desc: 'Karnataka' },
+    //   { key: 'TN', desc: 'Tamil Nadu' },
+    //   { key: 'WB', desc: 'West Bengal' },
+    //   // Add more states here as needed
+    // ];
     this.windowRef = this.win.windowRef;
     //firebase.initializeApp(firebaseConfig);
     this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
